@@ -21,13 +21,28 @@
 
 @media (width >= 900px) {
   .columns > div {
-    align-items: center;
     flex-direction: unset;
-    gap: 24px;
+    gap: 30px;
   }
 
   .columns > div > div {
     flex: 1;
     order: unset;
   }
+}
+
+.two-column .columns h2 {
+  color: #0c2074;
+  font-size: 32px;
+  line-height: 34px;
+  font-weight: 300;
+  margin: 0 0 16px;
+}
+.two-column .columns a.button {
+  background-color: transparent;
+  padding: 0;
+  color: #0072c4;
+}
+.two-column .columns a.button:hover {
+  text-decoration: underline;
 }
