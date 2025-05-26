@@ -1,12 +1,13 @@
 footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+  background-color: #f1f1f1;
+  font-size: 15px;
 }
 
 footer .footer > div {
   margin: auto;
   max-width: 1200px;
-  padding: 40px 24px 24px;
+  padding: 50px 24px 50px;
+  text-align: center;
 }
 
 footer .footer p {
@@ -15,6 +16,6 @@ footer .footer p {
 
 @media (width >= 900px) {
   footer .footer > div {
-    padding: 40px 32px 24px;
+    padding: 50px 24px 50px;
   }
 }

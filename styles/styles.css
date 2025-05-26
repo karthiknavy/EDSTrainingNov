@@ -73,9 +73,9 @@
 body {
   display: none;
   margin: 0;
-  color: var(--text-color);
-  font-family: var(--body-font-family);
-  font-size: var(--body-font-size-s);
+  color: #000;
+  font-family: "Times New Roman", Georgia, Serif;
+  font-size: 15px;
   line-height: 1.5;
 }
 
@@ -105,8 +105,9 @@ h5,
 h6 {
   margin-top: 0;
   margin-bottom: 1em;
-  font-family: var(--heading-font-family);
-  font-weight: 600;
+  font-family: "Playfair Display", serif;
+  font-weight: 400;
+  letter-spacing: 5px;
   line-height: 1.25;
   scroll-margin: 40px;
 }
@@ -115,7 +116,7 @@ h1 { font-size: var(--heading-font-size-xxl); }
 h2 { font-size: var(--heading-font-size-xl); line-height: 40px; font-weight: 300; color: #0c2074;}
 h3 { font-size: var(--heading-font-size-l); }
 h4 { font-size: var(--heading-font-size-m); }
-h5 { font-size: var(--heading-font-size-s); }
+h5 { font-size: 18px; }
 h6 { font-size: var(--heading-font-size-xs); }
 
 p,
@@ -232,9 +233,10 @@ main > .section {
 }
 
 main > .section > div {
-  max-width: 1150px;
+  max-width: 1110px;
   margin: auto;
-  padding: 0 20px;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
 main > .section:first-of-type {
@@ -243,7 +245,7 @@ main > .section:first-of-type {
 
 @media (width >= 900px) {
   main > .section > div {
-    padding: 0 20px;
+    padding: 0 16px;
   }
 }
 

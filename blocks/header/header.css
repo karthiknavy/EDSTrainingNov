@@ -17,7 +17,7 @@ header nav {
   margin: auto;
   max-width: 1248px;
   height: var(--nav-height);
-  padding: 0 24px;
+  padding: 8px 16px;
   font-family: var(--body-font-family);
 }
 
@@ -36,7 +36,7 @@ header nav[aria-expanded='true'] {
     justify-content: space-between;
     gap: 0 32px;
     max-width: 1264px;
-    padding: 0 32px;
+    padding: 8px 16px;
   }
 
   header nav[aria-expanded='true'] {
@@ -48,6 +48,14 @@ header nav[aria-expanded='true'] {
 header nav p {
   margin: 0;
   line-height: 1;
+  padding: 8px 16px;
+  display: inline-block;
+}
+header nav p code {
+  font-size: 15px;
+  letter-spacing: 4px;
+  font-weight: normal;
+  font-family: "Times New Roman", Georgia, Serif;
 }
 
 header nav a:any-link {
@@ -138,10 +146,10 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 /* brand */
 header .nav-brand {
   grid-area: brand;
-  flex-basis: 128px;
   font-size: var(--heading-font-size-s);
   font-weight: 700;
   line-height: 1;
+  padding: 8px 16px;
 }
 
 header nav .nav-brand img {
@@ -151,16 +159,12 @@ header nav .nav-brand img {
 
 /* sections */
 header nav .nav-sections {
-  grid-area: sections;
-  flex: 1 1 auto;
-  display: none;
-  visibility: hidden;
+ 
 }
 
 header nav[aria-expanded='true'] .nav-sections {
   display: block;
   visibility: visible;
-  align-self: start;
 }
 
 header nav .nav-sections ul {
