@@ -347,4 +347,9 @@ $(document).ready(function () {
       }
     });
   }, 3000);
+  $('body').on('click', '.nav-sections p a', function() {
+    let url = $(this).attr('href');
+    let urlId = url?.replace('#', '');
+    $("html, body").animate({ scrollTop: $('div[data-id="' + urlId + '"]').offset().top - 60 }, "slow");
+  });
 });

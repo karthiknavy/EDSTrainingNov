@@ -204,6 +204,7 @@
     font-size: 15px;
     font-family: 'Times New Roman', Times, serif;
     border-radius: 0;
+    max-width: max-content;
   }
   .form .form-submit button:hover {
     background-color: #ccc;
