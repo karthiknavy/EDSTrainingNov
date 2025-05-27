@@ -33,7 +33,7 @@
 
 .two-column {
   padding: 64px 0;
-  margin: 0 !important;
+  margin: 0 auto !important;
   border-bottom: 1px solid #ccc;
 }
 .two-column .columns h2 {
@@ -46,8 +46,21 @@
 .two-column .columns h2, .two-column .columns h5 {
   text-align: center;
 }
-.two-column .columns p {
+.two-column .columns.column-big-para p {
   font-size: 18px;
+}
+.two-column .columns.column-small-para p {
+  font-size: 15px;
+  color: #757575;
+  margin-bottom: 45px;
+}
+.two-column .columns.column-big-para > div > div > p strong {
+  font-weight: normal;
+  background-color: #f1f1f1;
+  padding: 2px 5px;
+}
+.two-column .columns.column-big-para > div > div > p:last-child {
+  color: #757575;
 }
 .two-column .columns a.button {
   background-color: transparent;

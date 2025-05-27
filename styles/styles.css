@@ -78,13 +78,15 @@ body {
   font-size: 15px;
   line-height: 1.5;
 }
-
+* {
+  box-sizing: border-box;
+}
 body.appear {
   display: block;
 }
 
 header {
-  height: var(--nav-height);
+  height: 44px;
 }
 
 header .header,
@@ -113,7 +115,7 @@ h6 {
 }
 
 h1 { font-size: var(--heading-font-size-xxl); }
-h2 { font-size: var(--heading-font-size-xl); line-height: 40px; font-weight: 300; color: #0c2074;}
+h2 { font-size: 36px; line-height: 45px; font-weight: 400; color: #000;}
 h3 { font-size: var(--heading-font-size-l); }
 h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: 18px; }
@@ -166,7 +168,7 @@ a:hover {
 }
 
 /* buttons */
-a.button:any-link,
+
 button {
   box-sizing: border-box;
   display: inline-block;
@@ -229,7 +231,8 @@ main img {
 
 /* sections */
 main > .section {
-  margin: 40px 0;
+  margin: 40px auto;
+  max-width: 1100px
 }
 
 main > .section > div {
@@ -240,7 +243,8 @@ main > .section > div {
 }
 
 main > .section:first-of-type {
-  margin-top: 0;
+  margin: 0;
+  max-width: 100%;
 }
 
 @media (width >= 900px) {

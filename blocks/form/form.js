@@ -336,3 +336,15 @@ export default async function decorate(block) {
     formLink.replaceWith(form);
   }
 }
+
+$(document).ready(function () {
+  setTimeout( function() { 
+    $('.form-block form .field-wrapper').each(function () {
+      let $ths = $(this);
+      let labelTxt = $ths.find('.field-label')?.text();
+      if(labelTxt != 'date') {
+        $ths.find('input').attr('placeholder', labelTxt);
+      }
+    });
+  }, 3000);
+});
