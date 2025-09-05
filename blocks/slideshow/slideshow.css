@@ -1,0 +1,56 @@
+
+.slideshow-wrapper {
+    position: relative;
+}
+.slideshow picture img {
+    width: 100%;
+    vertical-align: bottom;
+}
+.slideshow > div > div > p {
+    margin: 0;
+}
+.slideshow > div > div > p:last-child {
+    padding: 20px 10px;
+    color: #fff;
+    font-size: 16px;
+    margin: 0;
+    text-align: center;
+    background-color: #222;
+}
+.thumbnailWrapper {
+    display: flex;
+    flex-direction: row;
+}
+.thumbnailWrapper .thumbnailImg img {
+    opacity: 0.6;
+    cursor: pointer;
+}
+.thumbnailWrapper .thumbnailImg img.active, .thumbnailWrapper .thumbnailImg img:hover {
+    opacity: 1;
+}
+.slideArrow {
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.slideArrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    text-decoration: none;
+}
+.arrowPrev {
+    left: 16px;
+}
+.arrowNext {
+    right: 16px;
+}
