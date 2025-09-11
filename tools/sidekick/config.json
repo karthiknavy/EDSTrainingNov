@@ -6,7 +6,8 @@
         "title": "Library",
         "environments": ["edit"],
         "url": "/tools/sidekick/library.html",
-        "includePaths": ["**.docx**"]
+        "includePaths": ["https://github.com/adobe/aem-block-collection/tree/main/blocks/cards"],
+        "isPalette": true
       }
     ]
   }
