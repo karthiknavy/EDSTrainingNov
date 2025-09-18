@@ -1,10 +1,11 @@
 .card-carousel-container .default-content-wrapper h1 {
 	color: #cf2230;
 	text-align: center;
-	padding-bottom: 3.125vw;
+	padding-bottom: 48px;
 	margin-bottom: 0;
 	font-family: 'GillSans-semibold';
 	font-size: 2.08333vw;
+	font-weight: 500;
 }
 
 .card-carousel-container div.card-carousel.block {
@@ -46,14 +47,16 @@
 
 .card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title h2 {
 	margin-top: 0;
-	font-family: GillSans-Regular;
+	font-weight: 400;
+	text-align:left;
+	font-family: GillSans-regular;
 	font-size: 1.77083vw;
 	color: #000;
 	margin-bottom: 15px;
 }
 
 .card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title > p:nth-child(2) {
-  /* font-family: Roboto-Regular; */
+  	font-family: roboto;
 	font-size: 1.04167vw;
 	color: #6e6e6e;
 	margin-bottom: 1.04167vw;
@@ -70,7 +73,7 @@
 	border-radius: 5px;
 	text-align: center;
 	padding: 8px 20px;
-	font-family: GillSans-Regular;
+	font-family: GillSans-regular;
 	font-size: 1.04167vw;
 	color: #000;
 	margin: 0px;
@@ -79,7 +82,7 @@
 }
 
 .card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title > p:nth-child(4) {
-  /* font-family: Roboto-Regular; */
+  	font-family: roboto;
 	font-size: 1.04167vw;
 	color: #6e6e6e;
 	margin-bottom: .52083vw;
@@ -87,7 +90,7 @@
 }
 
 .card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title > p:nth-child(5) {
-  /*font-family: Roboto-Medium;*/
+  	font-family: roboto-medium;
 	font-size: 1.875vw;
 	color: #000;
 	margin: 0;
@@ -165,7 +168,7 @@
 
 .card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-body ul > li {
 	text-align: left;
-  /* font-family: Roboto-Regular; */
+  	font-family: roboto;
 	font-size: 1.04167vw;
 	color: #000;
 	margin-bottom: 1.04167vw;
@@ -177,11 +180,12 @@
 
 .card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-brochure {
 	margin-top: auto;
+	padding-top: 42px;
 }
 
 .card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-brochure > p {
 	display: flex;
-  /* font-family: Roboto-Regular; */
+  	font-family: roboto;
 	font-size: .9375vw;
 	align-items: center;
 	border-top: 1px solid #cececf;
@@ -233,7 +237,10 @@
 	background: #e1e1e1;
 	cursor: default;
 }
-
+.section.card-carousel-container{
+	padding-top:60px;
+	padding-bottom:60px;
+}
 @media (width <= 991px) {
 	.card-carousel-container div.card-carousel.block ul.card-list {
     margin: 0;
@@ -245,7 +252,128 @@
 }
 
 @media (width >= 991px) and (width <=1200px) {
+	.card-carousel-container div.card-carousel.block ul.card-list {
+		margin: 0 36px;
+	}
 	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item {
-      flex: 0 0 50%;
-  }
+    	flex: 0 0 50%;
+  	}
+}
+
+@media (width <= 1200px) {
+	.card-carousel-container .default-content-wrapper h1 {
+		/* font-size: 7.22222vw; */
+		padding-bottom: 38px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item {
+		padding: 30px 20px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title h2 {
+		font-size: 30px;
+		font-weight: inherit;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title > p:nth-child(2) {
+		font-size: 20px;
+		margin-bottom: 20px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title .button-container {
+		margin-bottom: 20px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title .button-container a {
+		font-size: 20px;
+		display: inline-block;
+		line-height: inherit;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title > p:nth-child(4) {
+		font-size: 20px;
+		margin-bottom: 10px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title > p:nth-child(5) {
+		font-size: 36px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .card-carousel-image .indicator {
+		width: 1pc;
+		height: 1pc;
+		margin-right: 1pc;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .card-carousel-image .indicator.active {
+		width: 24px;
+		height: 24px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-body ul {
+		padding: 28px 0 0 1pc;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-body ul > li {
+		font-size: 18px;
+		margin-bottom: 20px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-brochure > p {
+		padding-top: 30px;
+		font-size: 18px;
+		justify-content: space-between;
+	}
+	.card-carousel-container div.card-carousel.block div.leftSlider, .card-carousel-container div.card-carousel.block div.rightSlider {
+		top: 37%;
+	}
+}
+@media (width <= 991px) {
+	.card-carousel-container .default-content-wrapper h1{
+		font-size: 3.02725vw;
+	}
+	      
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title h2 {
+		font-size: 24px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title > p:nth-child(2) {
+		margin-bottom: 16px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title .button-container {
+		margin-bottom: 16px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title .button-container a {
+		font-size: 16px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title > p:nth-child(4) {
+		font-size: 16px;
+		margin-bottom: 8.25px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title > p:nth-child(5) {
+		font-size: 29.75px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .card-carousel-image .indicator {
+		width: 19.75px;
+		height: 19.75px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-body ul {
+		padding: 16px 0 0 1pc;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-body ul > li {
+		margin-bottom: 16px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-brochure{
+		padding-top: 24px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-brochure > p{
+		padding: 24px 0 24px 0;
+	}
+
+}
+@media   (max-width: 600px) {
+	.card-carousel-container .default-content-wrapper h1{
+	         font-size: 7.22222vw; 
+			padding-bottom: 38px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title h2{
+		font-size: 30px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title > p:nth-child(4){
+		font-size: 20px;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title > p:nth-child(5){
+		font-size: 36px;
+		font-family: roboto-medium;
+	}
+	.card-carousel-container div.card-carousel.block ul.card-list > li.card-item .cards-card-title .button-container a{
+		font-size: 20px;
+	}
 }
