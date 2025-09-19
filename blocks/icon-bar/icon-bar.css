@@ -1,7 +1,10 @@
+
+
 .icon-bar {
-  width: 100%; 
+  width: 400px; 
   background-color: #555;
   overflow: auto; 
+  margin-top: 20px;
 }
 
 .icon-bar a {
@@ -20,4 +23,23 @@
 
 .active {
   background-color: #04AA6D; 
+}
+
+.icon-bar > div > div {
+  width: 400px;
+  background-color: #555;
+  display: flex;
+}
+.icon-bar .button-container {
+  margin: 0;
+  padding: 12px 5px;
+}
+.icon-bar .button-container a {
+  margin: 0;
+  padding: 5px 15px;
+  width: 100%;
+  background-color: transparent;
+}
+.icon-bar .button-container:hover {
+  background-color: #000;
 }

@@ -7,7 +7,7 @@ $(document).ready(function() {
       let iconTxtLower = iconTxt.toLowerCase();
       console.log(iconTxtLower);
       $iconLink.empty();
-      $iconLink.append('<i class"fa ' + iconTxtLower + '"></i>')
+      $iconLink.append(iconTxtLower);
     })
-  }, 200);
+  }, 10);
 });
