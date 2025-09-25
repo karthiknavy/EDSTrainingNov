@@ -63,7 +63,7 @@ setTimeout(() => {
             loadListItems();
         }
     });
-}, "2000");
+}, 4000);
 
 // Initial load on page load
 export default async function decorate(block) {
