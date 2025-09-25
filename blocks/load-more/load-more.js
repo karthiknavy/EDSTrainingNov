@@ -26,8 +26,8 @@ async function fetchForm(pathname) {
 let dataItems;
 let currentPage = 1;
 const itemsPerPage = 10;
-const container = document.querySelector(".load-more-listing");
-const btnContainer = document.querySelector(".load-more-listing-container");
+const container = document.querySelector(".load-more");
+const btnContainer = document.querySelector(".load-more-container");
 
 
 async function createForm(formURL) {
