@@ -5,7 +5,6 @@ $(document).ready(function() {
       let $iconLink = $(this).find('a');
       let iconTxt = $iconLink.text();
       let iconTxtLower = iconTxt.toLowerCase();
-      console.log(iconTxtLower);
       $iconLink.empty();
       $iconLink.append(iconTxtLower);
     })

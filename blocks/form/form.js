@@ -1,4 +1,5 @@
-import { sampleRUM } from '../../scripts/aem.js';
+/* eslint-disable linebreak-style */
+import { sampleRUM } from '../../scripts/lib-franklin.js';
 import decorateFieldset from './fieldset.js';
 
 function generateUnique() {
@@ -47,7 +48,7 @@ async function submitForm(form) {
     });
     if (response.ok) {
       sampleRUM('form:submit');
-      window.location.href = form.dataset?.redirect || 'thankyou';
+      window.location.href = '/thankyou.html';
     } else {
       const error = await response.text();
       throw new Error(error);
@@ -132,13 +133,52 @@ function createButton(fd) {
   const button = document.createElement('button');
   button.textContent = fd.Label;
   button.type = fd.Type;
-  button.classList.add('button');
+  button.classList.add('btn-info');
+  button.classList.add('btn');
+  button.classList.add('btn-lg');
   button.dataset.redirect = fd.Extra || '';
   button.id = fd.Id;
   button.name = fd.Name;
+  button.addEventListener("click", nextFunc);
   wrapper.replaceChildren(button);
   return wrapper;
 }
+
+// let currentFieldsetIndex = 0;
+// function nextFunc(){
+//   console.log("clicked");
+//   const fieldsets = document.querySelectorAll('fieldset');
+//   fieldsets[currentFieldsetIndex].classList.remove('active');
+//   currentFieldsetIndex++;
+//   if(currentFieldsetIndex >= fieldsets.length){
+//     currentFieldsetIndex=0;
+//   }
+//   fieldsets[currentFieldsetIndex].classList.add('active');
+// }
+let currentFieldsetIndex = 0;
+
+function nextFunc() {
+  const fieldsets = document.querySelectorAll('fieldset');
+  fieldsets[currentFieldsetIndex].classList.remove('active');
+  // eslint-disable-next-line no-plusplus
+  currentFieldsetIndex++;
+  if (currentFieldsetIndex >= fieldsets.length) {
+    currentFieldsetIndex = 0;
+  }
+  fieldsets[currentFieldsetIndex].classList.add('active');
+  // Check if the current fieldset is the last one and show the separate div if it is
+  if (isLastFieldset(fieldsets[currentFieldsetIndex])) {
+    document.getElementById('submit').style.display = 'block';
+  } else {
+    document.getElementById('submit').style.display = 'none';
+  }
+}
+
+function isLastFieldset(fieldset) {
+  const fieldsets = document.querySelectorAll('fieldset');
+  return fieldset === fieldsets[fieldsets.length - 1];
+}
+
 function createSubmit(fd) {
   const wrapper = createButton(fd);
   return wrapper;
@@ -310,7 +350,8 @@ async function createForm(formURL) {
     if (input) {
       input.id = fd.Id;
       input.name = fd.Name;
-      input.value = fd.Value;
+     // input.value = fd.Value;
+      input.Placeholder = fd.Placeholder;
       if (fd.Description) {
         input.setAttribute('aria-describedby', `${fd.Id}-description`);
       }
@@ -326,9 +367,16 @@ async function createForm(formURL) {
     handleSubmit(form);
   });
   decorateFormFields(form);
+  addActiveClassToFirstFieldset(form);
   return form;
 }
-
+//new function for adding active class to the first fieldset
+function addActiveClassToFirstFieldset(form) {
+  const firstfieldset = form.querySelector('fieldset');
+  if (firstfieldset) {
+    firstfieldset.classList.add('active');
+  }
+}
 export default async function decorate(block) {
   const formLink = block.querySelector('a[href$=".json"]');
   if (formLink) {
@@ -336,20 +384,3 @@ export default async function decorate(block) {
     formLink.replaceWith(form);
   }
 }
-
-$(document).ready(function () {
-  setTimeout( function() { 
-    $('.form-block form .field-wrapper').each(function () {
-      let $ths = $(this);
-      let labelTxt = $ths.find('.field-label')?.text();
-      if(labelTxt != 'date') {
-        $ths.find('input').attr('placeholder', labelTxt);
-      }
-    });
-  }, 3000);
-  $('body').on('click', '.nav-sections p a', function() {
-    let url = $(this).attr('href');
-    let urlId = url?.replace('#', '');
-    $("html, body").animate({ scrollTop: $('div[data-id="' + urlId + '"]').offset().top - 60 }, "slow");
-  });
-});
