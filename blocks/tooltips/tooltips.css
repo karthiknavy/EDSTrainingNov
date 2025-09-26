@@ -1,0 +1,30 @@
+.tooltips > div {
+    position: relative;
+  }
+  .tooltips p {
+      font-size: 14px;
+      line-height: 18.2px;
+  }
+  .tooltips > div > div:nth-child(2) {
+    position: absolute;
+    background: #fff;
+    color: #000;
+    font-size: 12px; /* Smaller font size */
+    padding: 0px 10px 6px 10px; /* Refined padding */
+    border-radius: 6px;
+    z-index: 10;
+    margin-top: 5px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Optional: subtle shadow */
+  }
+  
+  .tooltips > div:hover > div:nth-child(2) {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  
