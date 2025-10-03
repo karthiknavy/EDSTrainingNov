@@ -1,0 +1,196 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: tahoma;
+}
+body{
+    background-color: cadetblue;
+}
+.timeline{
+    position: relative;
+    max-width: 1200px;
+    margin: 100px auto;
+}
+.timeline > div {
+    position: relative;
+    padding: 10px 40px;
+    width: 50%;
+    animation: movedown 1s linear forwards;
+    opacity:0;
+}
+@keyframes movedown{
+    0%{
+        opacity: 1;
+        transform: translateY(-30px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+.text-box{
+    position: relative;
+    padding:10px 20px;
+    background-color: white;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.timeline > div:nth-child(odd){
+    left: 0;
+}
+.timeline > div:nth-child(even){
+    left: 50%;
+}
+.timeline > div > div:nth-child(2){
+    position: relative;
+    padding: 10px 20px;
+    background-color: white;
+    border-radius: 6px;
+    font-size: 15px;
+}
+.timeline > div > div > picture{
+    position: absolute;
+    width: 40px;
+    border-radius: 50%;
+    top: 32px;
+    z-index: 10;
+}
+.timeline > div:nth-child(even) picture{
+    left:-20px;
+}
+.timeline > div:nth-child(odd) picture{
+    right:-20px;
+}
+.timeline::after{
+    content:'';
+    position: absolute;
+    width: 6px;
+    height: 100%;
+    background: white;
+    top:0;
+    left: 50%;
+    margin-left: -3px;
+    z-index: -1;
+    animation: moveline 6s linear;
+}
+@keyframes moveline{
+    0%{
+        height: 0;
+    }
+    100%{
+        height: 100%;
+    }
+
+}
+.text-box h2{
+    font-weight: 600;
+}
+.text-box small{
+    display: inline-block;
+    margin-bottom: 15px;
+}
+.left-conatiner-arrow{
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: 28px;
+    z-index: 1;
+    border-top:15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 15px solid white;
+    right: -15px;
+}
+.right-conatiner-arrow{
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: 28px;
+    z-index: 1;
+    border-top:15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-right: 15px solid white;
+    left: -14px;
+}
+.timeline.block > div:nth-child(odd)::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 15px solid white;
+}
+.timeline.block > div:nth-child(even)::before {   
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 26px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 15px solid white;
+}
+.timeline > div:nth-child(1){
+    animation-delay: 0s;
+}
+.timeline > div:nth-child(2){
+    animation-delay: 1s;
+}
+.timeline > div:nth-child(3){
+    animation-delay: 2s;
+}
+.timeline > div:nth-child(4){
+    animation-delay: 3s;
+}
+.timeline > div:nth-child(5){
+    animation-delay: 4s;
+}
+.timeline > div:nth-child(6){
+    animation-delay: 5s;
+}
+
+
+@media screen and (max-width: 600px) {
+    .timeline{
+        margin: 50px auto;
+    }
+    .timeline::after{
+        left: 31px;
+    }
+    .timeline > div{
+        width: 100%;
+        padding-left: 60px;
+        padding-right: 25px;
+        left: 0 !important;
+    }
+    .text-box{
+        font-size: 13px;
+    }
+    .text-box small{
+        margin-bottom: 10px;
+    }
+    .right-container{
+        left: 0;
+    }
+    .timeline > div:nth-child(odd) picture, .timeline > div:nth-child(even) picture {
+        left: 10px;
+    }
+    .timeline.block > div:nth-child(even)::before{
+        left: 46px;
+    }
+    .timeline.block > div:nth-child(odd)::before{
+        left: 46px;
+        transform: rotate(180deg);
+    }
+    h2{
+        font-size: 20px;
+    }
+    h3{
+        font-size: 16px;
+    }
+}
