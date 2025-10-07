@@ -2,6 +2,8 @@
 
   .socialmedia>div>div>p .icon {
     display: inline;
+    width: 40px;
+    height: 40px;
   }
   
   .socialmedia svg {
