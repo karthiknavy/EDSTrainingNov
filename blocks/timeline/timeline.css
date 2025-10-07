@@ -1,95 +1,133 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: tahoma;
 }
-body{
+
+body {
     background-color: white;
 }
-.timeline{
+
+.timeline {
     position: relative;
     max-width: 1200px;
     margin: 100px auto;
 }
-.timeline h2, .timeline h3, .timeline p{color: white;margin: 0 0 10px 0;}
-.timeline > div {
+
+.timeline h2 {
+    text-transform: uppercase;
+    font-size: 28px;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    font-family: tahoma;
+    margin-bottom: 0 !important;
+}
+
+.timeline h3 {
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0;
+    font-family: tahoma;
+}
+
+.timeline h2,
+.timeline h3,
+.timeline p {
+    color: white;
+    margin: 0 0 10px 0;
+}
+
+.timeline>div {
     position: relative;
     padding: 10px 40px;
     width: 50%;
     animation: movedown 1s linear forwards;
-    opacity:0;
+    opacity: 0;
 }
-@keyframes movedown{
-    0%{
+
+@keyframes movedown {
+    0% {
         opacity: 1;
         transform: translateY(-30px);
     }
-    100%{
+
+    100% {
         opacity: 1;
         transform: translateY(0px);
     }
 }
-.text-box{
+
+.text-box {
     position: relative;
-    padding:10px 20px;
+    padding: 10px 20px;
     background-color: white;
     border-radius: 6px;
     font-size: 15px;
 }
 
-.timeline > div:nth-child(odd){
+.timeline>div:nth-child(odd) {
     left: 0;
 }
-.timeline > div:nth-child(even){
+
+.timeline>div:nth-child(even) {
     left: 50%;
 }
-.timeline > div > div:nth-child(2){
+
+.timeline>div>div:nth-child(2) {
     position: relative;
     padding: 10px 20px;
     background-color: #585959;
     border-radius: 6px;
     font-size: 15px;
 }
-.timeline > div > div > picture{
+
+.timeline>div>div>picture {
     position: absolute;
     width: 40px;
     border-radius: 50%;
     top: 32px;
     z-index: 10;
 }
-.timeline > div:nth-child(even) picture{
-    left:-20px;
+
+.timeline>div:nth-child(even) picture {
+    left: -20px;
 }
-.timeline > div:nth-child(odd) picture{
-    right:-20px;
+
+.timeline>div:nth-child(odd) picture {
+    right: -20px;
 }
-.timeline::after{
-    content:'';
+
+.timeline::after {
+    content: '';
     position: absolute;
     width: 6px;
     height: 100%;
     background: #585959;
-    top:0;
+    top: 0;
     left: 50%;
     margin-left: -3px;
     z-index: -1;
     animation: moveline 6s linear;
 }
-@keyframes moveline{
-    0%{
+
+@keyframes moveline {
+    0% {
         height: 0;
     }
-    100%{
+
+    100% {
         height: 100%;
     }
 
 }
+
 @keyframes borderHighlight {
     0% {
         border-color: #00aaff;
         box-shadow: 0 0 10px #00aaff;
     }
+
     100% {
         border-color: #585959;
         box-shadow: none;
@@ -105,47 +143,52 @@ main img {
     animation: borderHighlight 1s ease-out;
 }
 
-.text-box h2{
+.text-box h2 {
     font-weight: 600;
 }
-.text-box small{
+
+.text-box small {
     display: inline-block;
     margin-bottom: 15px;
 }
-.left-conatiner-arrow{
+
+.left-conatiner-arrow {
     height: 0;
     width: 0;
     position: absolute;
     top: 28px;
     z-index: 1;
-    border-top:15px solid transparent;
+    border-top: 15px solid transparent;
     border-bottom: 15px solid transparent;
     border-left: 15px solid white;
     right: -15px;
 }
-.right-conatiner-arrow{
+
+.right-conatiner-arrow {
     height: 0;
     width: 0;
     position: absolute;
     top: 28px;
     z-index: 1;
-    border-top:15px solid transparent;
+    border-top: 15px solid transparent;
     border-bottom: 15px solid transparent;
     border-right: 15px solid white;
     left: -14px;
 }
-.timeline.block > div:nth-child(odd)::before {
+
+.timeline.block>div:nth-child(odd)::before {
     content: "";
     position: absolute;
     top: 20px;
-    right: 25px;
+    right: 26px;
     width: 0;
     height: 0;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
     border-left: 15px solid #585959;
 }
-.timeline.block > div:nth-child(even)::before {   
+
+.timeline.block>div:nth-child(even)::before {
     content: "";
     position: absolute;
     top: 20px;
@@ -154,64 +197,81 @@ main img {
     height: 0;
     border-top: 10px solid transparent;
     border-bottom: 10px solid transparent;
-    border-right: 15px solid white;
+    border-right: 15px solid #585959;
 }
-.timeline > div:nth-child(1){
+
+.timeline>div:nth-child(1) {
     animation-delay: 0s;
 }
-.timeline > div:nth-child(2){
+
+.timeline>div:nth-child(2) {
     animation-delay: 1s;
 }
-.timeline > div:nth-child(3){
+
+.timeline>div:nth-child(3) {
     animation-delay: 2s;
 }
-.timeline > div:nth-child(4){
+
+.timeline>div:nth-child(4) {
     animation-delay: 3s;
 }
-.timeline > div:nth-child(5){
+
+.timeline>div:nth-child(5) {
     animation-delay: 4s;
 }
-.timeline > div:nth-child(6){
+
+.timeline>div:nth-child(6) {
     animation-delay: 5s;
 }
 
 
 @media screen and (max-width: 600px) {
-    .timeline{
+    .timeline {
         margin: 50px auto;
     }
-    .timeline::after{
+
+    .timeline::after {
         left: 31px;
     }
-    .timeline > div{
+
+    .timeline>div {
         width: 100%;
         padding-left: 60px;
         padding-right: 25px;
         left: 0 !important;
     }
-    .text-box{
+
+    .text-box {
         font-size: 13px;
     }
-    .text-box small{
+
+    .text-box small {
         margin-bottom: 10px;
     }
-    .right-container{
+
+    .right-container {
         left: 0;
     }
-    .timeline > div:nth-child(odd) picture, .timeline > div:nth-child(even) picture {
+
+    .timeline>div:nth-child(odd) picture,
+    .timeline>div:nth-child(even) picture {
         left: 10px;
     }
-    .timeline.block > div:nth-child(even)::before{
+
+    .timeline.block>div:nth-child(even)::before {
         left: 46px;
     }
-    .timeline.block > div:nth-child(odd)::before{
+
+    .timeline.block>div:nth-child(odd)::before {
         left: 46px;
         transform: rotate(180deg);
     }
-    h2{
+
+    h2 {
         font-size: 20px;
     }
-    h3{
+
+    h3 {
         font-size: 16px;
     }
 }
