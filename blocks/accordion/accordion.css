@@ -1,38 +1,75 @@
+
 .accordion details {
-	border: 1px solid #dadada;
-}
-
+	border: 1px solid var(--dark-color);
+  }
 /* stylelint-disable-next-line no-descending-specificity */
-.accordion details+details {
-	margin-top: 24px;
-}
-
-.accordion details p {
-	margin: 0;
-}
-
-.accordion details .accordion-item-label p:first-child {
-	font-size: 7.222vw;
-	font-family: 'GillSans-Regular';
-}
-
-.accordion details summary {
+.accordion details + details {
+	margin-top: 16px;
+  }
+  
+  .accordion details summary {
 	position: relative;
 	padding: 0 16px;
-	padding-right: 46px;
+	padding-right: 48px;
 	cursor: pointer;
 	list-style: none;
 	overflow: auto;
 	transition: background-color 0.2s;
-}
-
-.accordion details[open] summary {
+  }
+  
+  .accordion details[open] summary {
 	background-color: var(--light-color);
+  }
+  
+  .accordion details summary:focus,
+  .accordion details summary:hover {
+	background-color: #ccc;
+  }
+  
+  .accordion details summary::-webkit-details-marker {
+	display: none;
+  }
+  
+  .accordion details summary::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 18px;
+	transform: translateY(-50%) rotate(135deg);
+	width: 9px;
+	height: 9px;
+	border: 2px solid;
+	border-width: 2px 2px 0 0;
+	transition: transform 0.2s;
+  }
+  
+  .accordion details[open] summary::after {
+	transform: translateY(-50%) rotate(-45deg);
+  }
+  
+  .accordion details .accordion-item-body {
+	padding: 0 16px;
+  }
+  .accordion details .accordion-item-body p {
+		font-size: 22px;
+		margin-bottom: 1em;
+  }
+  
+  .accordion details[open] .accordion-item-body {
+	border-top: 1px solid var(--dark-color);
+	background-color: var(--background-color);
+  }
+  @media (min-width: 768px) {
+	.accordion details .accordion-item-label p {
+		font-size: 22px;
+		font-family: 'GillSans-Regular';
+		margin-bottom: 1em;
+	}
 }
 
 .accordion details summary:focus,
 .accordion details summary:hover {
-	background-color: var(--light-color);
+	background-color: #ccc;
 }
 
 .accordion details summary::-webkit-details-marker {
@@ -403,12 +440,6 @@
 		margin-bottom: 9pt;
 		font-family: GillSans-Semibold;
 	}
-
-	.accordion details .accordion-item-label p:first-child {
-		font-size: 1.5625vw;
-		font-family: 'GillSans-Regular';
-	}
-
 }
 
 @media (max-width: 575.98px) {

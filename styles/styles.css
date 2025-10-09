@@ -75,7 +75,7 @@ body {
   margin: 0;
   color: #000;
   font-family: "Times New Roman", Georgia, Serif;
-  font-size: 15px;
+  font-size: 22px;
   line-height: 1.5;
 }
 * {
@@ -167,49 +167,6 @@ a:hover {
   text-decoration: underline;
 }
 
-/* buttons */
-a.button:any-link,
-button {
-  font-family: var(--body-font-family);
-  display: inline-block;
-  box-sizing: border-box;
-  text-decoration: none;
-  border: 2px solid transparent;
-  padding: 5px 30px;
-  text-align: center;
-  font-style: normal;
-  font-weight: 600;
-  cursor: pointer;
-  color: var(--background-color);
-  background-color: var(--link-color);
-  margin: 16px 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border-radius: 30px;
-}
-
-a.button:hover,
-a.button:focus,
-button:hover,
-button:focus {
-  background-color: var(--link-hover-color);
-  cursor: pointer;
-}
-
-button:disabled,
-button:disabled:hover {
-  background-color: var(--light-color);
-  cursor: unset;
-}
-
-a.button.secondary,
-button.secondary {
-  background-color: unset;
-  border: 2px solid currentcolor;
-  color: var(--text-color);
-}
-
 main img {
   max-width: 100%;
   width: auto;
@@ -239,12 +196,11 @@ main > .section > div {
   padding: 0 16px;
   box-sizing: border-box;
 }
-
-main > .section:first-of-type {
-  margin: 0;
-  max-width: 100%;
+@media (width >= 600px) {
+  main > .section {
+    padding: 64px 32px;
+  }
 }
-
 @media (width >= 900px) {
   main > .section > div {
     padding: 0 16px;
