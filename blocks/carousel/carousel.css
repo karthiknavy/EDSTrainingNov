@@ -58,7 +58,7 @@
   color: white;
   background-color: rgba(19 19 19 / 75%);
   position: relative;
-  width: var(--slide-content-width, auto);
+  width: auto;
 }
 
 .carousel .carousel-slide-indicators {
