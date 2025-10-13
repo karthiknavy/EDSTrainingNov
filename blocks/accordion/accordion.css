@@ -50,7 +50,7 @@
   .accordion details .accordion-item-body {
 	padding: 0 16px;
   }
-  .accordion details .accordion-item-body p {
+  .accordion.basic-accordion details .accordion-item-body p {
 		font-size: 22px;
 		margin-bottom: 1em;
   }
@@ -60,7 +60,7 @@
 	background-color: var(--background-color);
   }
   @media (min-width: 768px) {
-	.accordion details .accordion-item-label p {
+	.accordion.basic-accordion details .accordion-item-label p {
 		font-size: 22px;
 		font-family: 'GillSans-Regular';
 		margin-bottom: 1em;

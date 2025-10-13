@@ -115,7 +115,7 @@ h6 {
 }
 
 h1 { font-size: var(--heading-font-size-xxl); }
-h2 { font-size: 36px; line-height: 45px; font-weight: 400; color: #000;}
+h2 { font-size: 36px; line-height: 45px; font-weight: 400;}
 h3 { font-size: var(--heading-font-size-l); }
 h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: 18px; }
