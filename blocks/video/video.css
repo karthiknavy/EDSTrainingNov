@@ -69,8 +69,8 @@
   left: calc(50% + 2px);
   transform: translate(-50%, -50%);
 }
-
-.custom-video-wrapper video {
+/* custom video */
+.video-container video {
   display: block;
   width: 100%;
   max-width: 100%;
