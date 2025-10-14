@@ -1,0 +1,90 @@
+.testimonial-container {
+    padding: 20px 0; 
+}
+.testimonial-wrapper {
+    max-width: 800px; /* Adjust as needed */
+    margin: 0 auto;
+}
+
+/* Base style for the main block - simulates the W3Schools border/padding */
+.testimonial.block > div {
+    /* Main testimonial border and padding */
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px; /* Space between testimonials */
+    border-radius: 5px;
+    background-color: #f1f1f1;
+
+    /* Flexbox setup for image/text layout */
+    display: flex;
+    align-items: center; /* Vertically align items */
+    gap: 20px; /* Space between image and text */
+}
+
+/* Image styling */
+.testimonial.block picture
+{
+    width: 90px;
+    height: 90px;
+    display: block;
+}
+.testimonial.block picture img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+/* Text styling details */
+.testimonial.block p {
+    margin: 0; /* Remove default paragraph margins */
+}
+
+.testimonial.block p:first-child {
+    font-style: italic; 
+    font-weight: bold;
+}
+
+.testimonial.block p:nth-child(2) {
+    color: #888; 
+    font-size: 12px;
+}
+
+.testimonial.block p:last-child {
+    font-size: 18px; /* Main Quote */
+    line-height: 1.4;
+    color: #333;
+    margin-top: 10px; /* Space above the main quote */
+}
+
+/* ========================================================= */
+/* VARIANT 1: testimonial-left (Image on LEFT, Content on RIGHT) */
+/* ========================================================= */
+.testimonial-left .testimonial.block > div {
+    /* Default flex direction (Image, then Text) */
+    flex-direction: row;
+    text-align: left;
+    @media (max-width: 600px)
+    {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+
+/* ========================================================= */
+/* RESPONSIVENESS (for Mobile Screens) */
+/* ========================================================= */
+@media (max-width: 600px) {
+    .testimonial.block > div {
+        /* Stack the image and text vertically */
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 10px;
+        padding: 15px;
+    }
+
+
+}
+ 
