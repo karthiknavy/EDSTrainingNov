@@ -81,7 +81,9 @@
   min-height: 100%;
   object-fit: cover;
 }
-
+.video-wrapper > * {
+  text-align: left;
+}
 .video-wrapper {
   max-width: 100% !important;
   padding: 0 !important;
@@ -90,7 +92,7 @@
 .video.block button {
   margin-top: 10px;
   position: fixed;
-  bottom: 20px;
+  bottom: 10px;
   left: 20px;
   z-index: 99;
 }
