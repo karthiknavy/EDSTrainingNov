@@ -1,6 +1,6 @@
 div.sticky-wrapper {
     position: sticky;
-    top: 50px;
+    top: 0;
     background-color: yellow;
     padding: 50px !important;
     font-size: 20px;
