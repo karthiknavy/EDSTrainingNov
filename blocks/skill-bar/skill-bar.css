@@ -1,20 +1,25 @@
 .skill-bar{
     width: 100%;
     background-color: #ddd;
-    height: 20px;
+    height: 30px;
+    text-align: right;
+    color: #fff;
 }
 .skill-bar > div{
-    width: 10%;
+    width: 0%;
     background-color: green;
-    height: 20px;
+    height: 30px;
+}
+.skill-bar > div div{
+    padding-right: 10px;
 }
 .skill-bar-arrows div{
     display: flex;
 }
 .skill-bar-arrows div p{
     padding: 0 20px;
-    background: red;
-    color: white;
+    background: #ff0000;
+    color: #fff;
     margin-right: 10px;
     cursor: pointer;
 }
