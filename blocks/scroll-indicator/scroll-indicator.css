@@ -1,0 +1,29 @@
+body{
+    width: 1264px;
+    margin: 0 auto;
+}
+.progress-bar-wrapper{
+    position: relative;
+    padding: 0;
+    max-width: 1264px;
+}
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #3498db;
+    position: fixed;
+    top: 64px;
+    max-width: 1264px;
+  }
+  
+  .progress-bar div {
+    height: 8px;
+    background: #04AA6D;
+    width: 0%;
+  }
+  
+  .scroll-indicator {
+    padding: 100px 0;
+    margin: 50px auto 0 auto;
+    width: 80%;
+  }
