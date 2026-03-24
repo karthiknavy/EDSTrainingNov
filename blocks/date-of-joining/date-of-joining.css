@@ -1,0 +1,101 @@
+.date-of-joining .doj-field-wrapper {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 0.25em;
+  max-width: 400px;
+}
+
+.date-of-joining label {
+  font-size: var(--body-font-size-s, 0.875rem);
+  font-weight: 700;
+}
+
+.date-of-joining label[data-required]::after {
+  content: '*';
+  color: firebrick;
+  margin-inline-start: 0.5ch;
+}
+
+.date-of-joining .doj-input-container {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--dark-color, #ccc);
+  border-radius: 4px;
+  background-color: var(--background-color, #fff);
+  transition: border-color 0.2s;
+}
+
+.date-of-joining .doj-input-container:hover {
+  border-color: var(--text-color, #333);
+}
+
+.date-of-joining .doj-input-container:focus-within {
+  outline: 2px solid var(--link-color, #0055ff);
+  outline-offset: 2px;
+}
+
+.date-of-joining .doj-input-container.doj-invalid {
+  border-color: firebrick;
+}
+
+.date-of-joining .doj-input-container.doj-invalid:focus-within {
+  outline-color: firebrick;
+}
+
+.date-of-joining .doj-input-container input[type='text'] {
+  box-sizing: border-box;
+  flex: 1;
+  padding: 0.6em;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  background: transparent;
+  color: var(--text-color, #000);
+  font-size: var(--body-font-size-s, 0.875rem);
+  font-family: inherit;
+  outline: none;
+}
+
+.date-of-joining .doj-calendar-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-left: 1px solid var(--dark-color, #ccc);
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  padding: 0 0.5em;
+  color: var(--text-color, #333);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.date-of-joining .doj-date-picker {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.date-of-joining .doj-calendar-btn:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.date-of-joining .doj-calendar-btn:focus-visible {
+  outline: 2px solid var(--link-color, #0055ff);
+  outline-offset: 2px;
+}
+
+.date-of-joining .doj-error {
+  min-height: 1.2em;
+  font-size: var(--body-font-size-xs, 0.75rem);
+  color: firebrick;
+  font-weight: 600;
+}
