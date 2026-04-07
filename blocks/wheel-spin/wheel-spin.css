@@ -1,0 +1,64 @@
+.wheel-spin-container {
+    position: relative;
+  text-align: center;
+}
+ 
+.wheel-spin-container .wheel {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  margin: 40px auto 0;
+  border-radius: 50%;
+  border: 6px solid #333;
+  overflow: hidden;
+}
+ 
+.wheel-spin-container .slice {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 50%;
+  left: 50%;
+  transform-origin: 0% 0%;
+  background: #ff9800;
+  border: 1px solid #fff;
+  text-align: right;
+  padding: 5px;
+  font-size: 12px;
+}
+ 
+.wheel-spin-container .slice:nth-child(even) {
+  background: #4caf50;
+}
+ 
+.wheel-spin-container .spin-btn {
+  margin-top: 20px;
+  padding: 10px 25px;
+  font-size: 16px;
+  cursor: pointer;
+}
+ 
+.wheel-spin-container .spin-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+ 
+.wheel-spin-container .result {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+ 
+/* Pointer */
+.wheel-spin-container .pointer {
+  position: absolute;
+  top: calc(40px - 20px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 20px solid red;
+}
