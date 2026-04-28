@@ -1,0 +1,184 @@
+
+.cb-datepicker {
+  position: relative;
+  display: inline-block;
+  font-family: var(--body-font-family, system-ui, sans-serif);
+  max-width: 320px;
+}
+
+
+.cb-datepicker label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.cb-datepicker input[role='combobox'] {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.cb-datepicker input[role='combobox']:focus-visible {
+  outline: 2px solid var(--link-color, #1473e6);
+  outline-offset: 2px;
+}
+
+
+.cb-datepicker__dialog {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 1000;
+
+  background: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  padding: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  min-width: 280px;
+}
+
+
+.cb-datepicker__dialog[hidden] {
+  display: none;
+}
+
+
+.cb-datepicker__header {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.cb-datepicker__header select {
+  flex: 1;
+  padding: 0.25rem;
+  font-size: 0.875rem;
+}
+
+
+
+.cb-datepicker__grid {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.cb-datepicker__grid th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem;
+  color: #555;
+}
+
+.cb-datepicker__grid td {
+  padding: 0.4rem 0;
+  cursor: pointer;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.cb-datepicker__grid td:empty {
+  cursor: default;
+}
+
+
+.cb-datepicker__grid td:hover:not(:empty) {
+  background: rgba(3, 65, 141, 0.12);
+  color:black
+}
+
+.cb-datepicker__grid td.selected {
+  background: var(--link-color, #1473e6);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+
+.cb-datepicker__grid td:focus-visible {
+  outline: 2px solid var(--link-color, #1473e6);
+  outline-offset: -2px;
+}
+
+.cb-datepicker__footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.cb-datepicker__footer button {
+  flex: 1;
+  padding: 0.4rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.cb-datepicker__footer button:focus-visible {
+  outline: 2px solid var(--link-color, #1473e6);
+  outline-offset: 2px;
+}
+
+
+.cb-datepicker__grid td:focus-visible {
+  outline: 2px solid var(--link-color, #1473e6);
+  outline-offset: -2px;
+  background: rgba(20, 115, 230, 0.12);
+  border-radius: 4px;
+}
+
+
+.cb-datepicker__grid td:focus {
+  outline: 2px solid var(--link-color, #1473e6);
+  outline-offset: -2px;
+  background: rgba(20, 115, 230, 0.12);
+}
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+
+@media (max-width: 480px) {
+  .cb-datepicker__dialog {
+    min-width: 100%;
+  }
+}
+
+
+
+@media (prefers-reduced-motion: reduce) {
+  .cb-datepicker__dialog {
+    transition: none;
+  }
+}
+
+
+@media (forced-colors: active) {
+  .cb-datepicker__dialog {
+    border-color: ButtonText;
+    background: Canvas;
+  }
+
+  .cb-datepicker__grid td.selected {
+    background: Highlight;
+    color: HighlightText;
+    forced-color-adjust: none;
+  }
+}
+
