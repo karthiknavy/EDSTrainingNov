@@ -4,24 +4,44 @@
   --rs-thumb-radius: 50%;
   --rs-fill-color: var(--link-color, #1473e6);
   --rs-track-color: #e0e0e0;
-  --rs-thumb-bg: #ffffff;
+  --rs-thumb-bg: #fff;
   --rs-label-color: var(--text-color, #2c2c2c);
   --rs-value-color: var(--rs-fill-color);
-  --rs-focus-ring: 0 0 0 3px rgba(20,115,230,.3);
+  --rs-focus-ring: 0 0 0 3px rgb(20 115 230 / 30%);
 
   width: 100%;
   font-family: var(--body-font-family, adobe-clean, sans-serif);
 }
 
-.range-slider__label {
+/* ── Variants (custom-property overrides; declared early so thumb rules can */
+
+/* inherit via var()) ──────────────────────────────────────────────────────── */
+
+.range-slider-round {
+  --rs-thumb-radius: 50%;
+}
+
+.range-slider-square {
+  --rs-thumb-radius: 4px;
+}
+
+.range-slider-image {
+  --rs-thumb-bg: transparent;
+}
+
+/* ── Label ───────────────────────────────────────────────────────────────── */
+
+.range-slider .range-slider-label {
   display: block;
-  margin-bottom: .75rem;
-  font-size: .875rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--rs-label-color);
 }
 
-.range-slider__input {
+/* ── Input (base) ────────────────────────────────────────────────────────── */
+
+.range-slider .range-slider-input {
   width: 100%;
   margin: 0;
   appearance: none;
@@ -29,9 +49,9 @@
   cursor: pointer;
 }
 
+/* ── WebKit track ────────────────────────────────────────────────────────── */
 
-
-.range-slider__input::-webkit-slider-runnable-track {
+.range-slider .range-slider-input::-webkit-slider-runnable-track {
   height: var(--rs-track-height);
   border-radius: 9999px;
   background:
@@ -44,37 +64,55 @@
     );
 }
 
-.range-slider__input::-webkit-slider-thumb {
+/* ── WebKit thumb — base ─────────────────────────────────────────────────── */
+
+.range-slider .range-slider-input::-webkit-slider-thumb {
   appearance: none;
   width: var(--rs-thumb-size);
   height: var(--rs-thumb-size);
-  margin-top: calc(
-    (var(--rs-track-height) - var(--rs-thumb-size)) / 2
-  );
+  margin-top: calc((var(--rs-track-height) - var(--rs-thumb-size)) / 2);
   border-radius: var(--rs-thumb-radius);
   background: var(--rs-thumb-bg);
   border: 2px solid var(--rs-fill-color);
   box-sizing: border-box;
 }
 
-.range-slider__input:focus-visible::-webkit-slider-thumb {
+/* ── WebKit thumb — image variant (before focus-visible to keep specificity  */
+
+/* in ascending order) ───────────────────────────────────────────────────── */
+
+.range-slider-image .range-slider-input::-webkit-slider-thumb {
+  appearance: none;
+  background-image: var(--rs-thumb-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+}
+
+/* ── WebKit thumb — focus ring (highest specificity; must be last) ────────── */
+
+.range-slider .range-slider-input:focus-visible::-webkit-slider-thumb {
   box-shadow: var(--rs-focus-ring);
 }
 
+/* ── Firefox track ───────────────────────────────────────────────────────── */
 
-.range-slider__input::-moz-range-track {
+.range-slider .range-slider-input::-moz-range-track {
   height: var(--rs-track-height);
   background: var(--rs-track-color);
   border-radius: 9999px;
 }
 
-.range-slider__input::-moz-range-progress {
+.range-slider .range-slider-input::-moz-range-progress {
   height: var(--rs-track-height);
   background: var(--rs-fill-color);
   border-radius: 9999px;
 }
 
-.range-slider__input::-moz-range-thumb {
+/* ── Firefox thumb — base ────────────────────────────────────────────────── */
+
+.range-slider .range-slider-input::-moz-range-thumb {
   width: var(--rs-thumb-size);
   height: var(--rs-thumb-size);
   border-radius: var(--rs-thumb-radius);
@@ -83,75 +121,42 @@
   box-sizing: border-box;
 }
 
-.range-slider__value {
+/* ── Firefox thumb — image variant ──────────────────────────────────────── */
+
+.range-slider-image .range-slider-input::-moz-range-thumb {
+  appearance: none;
+  background-image: var(--rs-thumb-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+}
+
+/* ── Value display ───────────────────────────────────────────────────────── */
+
+.range-slider .range-slider-value {
   display: block;
-  margin-top: .5rem;
-  font-size: .875rem;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--rs-value-color);
   font-variant-numeric: tabular-nums;
 }
 
-/* ───────── Variants ───────── */
-
-/* Round (default) */
-.range-slider--round {
-  --rs-thumb-radius: 50%;
-}
-
-/* Square */
-.range-slider--square {
-  --rs-thumb-radius: 4px;
-}
-
-/* Image */
-.range-slider--image {
-  --rs-thumb-bg: transparent;
-}
-
-.range-slider--image .range-slider__input::-webkit-slider-thumb,
-.range-slider--image .range-slider__input::-moz-range-thumb {
-  background-image: var(--rs-thumb-image);
-  background-size: cover;
-  background-position: center;
-  border: none;
-}
-
-.range-slider--image {
-  --rs-thumb-bg: transparent;
-}
-
-
-.range-slider--image .range-slider__input::-webkit-slider-thumb {
-  appearance: none;
-  background-image: var(--rs-thumb-image);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border: none;
-}
-
-.range-slider--image .range-slider__input::-moz-range-thumb {
-  appearance: none;
-  background-image: var(--rs-thumb-image);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border: none;
-}
-
-
+/* ── Reduced motion ──────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
-  .range-slider__input::-webkit-slider-thumb,
-  .range-slider__input::-moz-range-thumb {
+  .range-slider .range-slider-input::-webkit-slider-thumb,
+  .range-slider .range-slider-input::-moz-range-thumb {
     transition: none;
   }
 }
 
+/* ── Forced colors (Windows High Contrast) ───────────────────────────────── */
+
 @media (forced-colors: active) {
-  .range-slider__input::-webkit-slider-thumb,
-  .range-slider__input::-moz-range-thumb {
+  .range-slider .range-slider-input::-webkit-slider-thumb,
+  .range-slider .range-slider-input::-moz-range-thumb {
     background: ButtonText;
     border-color: ButtonText;
   }

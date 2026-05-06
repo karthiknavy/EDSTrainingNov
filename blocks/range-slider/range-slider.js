@@ -1,5 +1,4 @@
 export default function decorate(block) {
-
   const rows = [...block.querySelectorAll(':scope > div')];
   const config = {};
 
@@ -8,7 +7,8 @@ export default function decorate(block) {
       .map((c) => c.textContent?.trim())
       .filter(Boolean);
     if (cells.length === 2) {
-      config[cells[0].toLowerCase()] = cells[1];
+      const [key, val] = cells;
+      config[key.toLowerCase()] = val;
     }
   });
 
@@ -17,31 +17,29 @@ export default function decorate(block) {
     return Number.isFinite(n) ? n : f;
   };
 
-  const min   = toNum(config.min,   0);
-  const max   = toNum(config.max,   100);
-  const step  = toNum(config.step,  1);
+  const min = toNum(config.min, 0);
+  const max = toNum(config.max, 100);
+  const step = toNum(config.step, 1);
   const value = toNum(config.value, min);
 
-  const label        = config.label ?? '';
-  const unit         = config.unit  ?? '';
+  const label = config.label ?? '';
+  const unit = config.unit ?? '';
   const unitPosition = config['unit-position'] ?? 'suffix';
-  const showValue    = config['show-value']?.toLowerCase() === 'true';
+  const showValue = config['show-value']?.toLowerCase() === 'true';
 
-
-  const VALID_STYLES  = ['round', 'square', 'pill'];
-  const sliderStyle   = VALID_STYLES.includes(config['slider-style'])
+  const VALID_STYLES = ['round', 'square', 'pill'];
+  const sliderStyle = VALID_STYLES.includes(config['slider-style'])
     ? config['slider-style']
     : 'round';
 
   const thumbImage = config['thumb-image'] ?? '';
 
-  const MIN_THUMB  = 8;
-  const thumbSize  = toNum(config['thumb-size'], null);
-  const safeThumb  = (thumbSize !== null && thumbSize >= MIN_THUMB) ? thumbSize : null;
+  const MIN_THUMB = 8;
+  const thumbSize = toNum(config['thumb-size'], null);
+  const safeThumb = (thumbSize !== null && thumbSize >= MIN_THUMB) ? thumbSize : null;
 
   const stepDecimals = (step.toString().split('.')[1] ?? '').length;
   const roundDisplay = (v) => Number(v.toFixed(stepDecimals));
-
 
   const formatValue = (v) => {
     const rounded = roundDisplay(v);
@@ -49,11 +47,10 @@ export default function decorate(block) {
     return unitPosition === 'prefix' ? `${unit}${rounded}` : `${rounded} ${unit}`;
   };
 
-
   const uid = `rs-${crypto.randomUUID().slice(0, 8)}`;
 
   const wrapper = document.createElement('div');
-  wrapper.className = `range-slider range-slider--${sliderStyle}`;
+  wrapper.className = `range-slider range-slider-${sliderStyle}`;
 
   if (thumbImage) {
     const isSafeUrl = (url) => {
@@ -76,31 +73,25 @@ export default function decorate(block) {
 
   if (label) {
     const labelEl = document.createElement('label');
-    labelEl.className   = 'range-slider__label';
-    labelEl.htmlFor     = uid;
+    labelEl.className = 'range-slider-label';
+    labelEl.htmlFor = uid;
     labelEl.textContent = label;
     wrapper.appendChild(labelEl);
-  } else {
-
-    if (typeof console !== 'undefined') {
-
-      console.warn('[range-slider] Missing "label" config — provide a descriptive label for accessibility.');
-    }
   }
 
   const input = document.createElement('input');
-  input.type      = 'range';
-  input.id        = uid;
-  input.className = 'range-slider__input';
-  input.min       = min;
-  input.max       = max;
-  input.step      = step;
-  input.value     = value;
+  input.type = 'range';
+  input.id = uid;
+  input.className = 'range-slider-input';
+  input.min = min;
+  input.max = max;
+  input.step = step;
+  input.value = value;
 
-  input.setAttribute('aria-label',     label || 'Range slider');
-  input.setAttribute('aria-valuemin',  min);
-  input.setAttribute('aria-valuemax',  max);
-  input.setAttribute('aria-valuenow',  value);
+  input.setAttribute('aria-label', label || 'Range slider');
+  input.setAttribute('aria-valuemin', min);
+  input.setAttribute('aria-valuemax', max);
+  input.setAttribute('aria-valuenow', value);
   input.setAttribute('aria-valuetext', formatValue(value));
 
   wrapper.appendChild(input);
@@ -108,8 +99,8 @@ export default function decorate(block) {
   let valueEl = null;
   if (showValue) {
     valueEl = document.createElement('span');
-    valueEl.className = 'range-slider__value';
-    valueEl.setAttribute('aria-live',   'polite');
+    valueEl.className = 'range-slider-value';
+    valueEl.setAttribute('aria-live', 'polite');
     valueEl.setAttribute('aria-atomic', 'true');
     valueEl.textContent = formatValue(value);
     wrapper.appendChild(valueEl);
@@ -119,14 +110,13 @@ export default function decorate(block) {
     const pct = (((current - min) / (max - min)) * 100).toFixed(4);
     wrapper.style.setProperty('--rs-pct', `${pct}%`);
 
-    input.setAttribute('aria-valuenow',  current);
+    input.setAttribute('aria-valuenow', current);
     input.setAttribute('aria-valuetext', formatValue(current));
 
     if (valueEl) {
       valueEl.textContent = formatValue(current);
     }
   };
-
 
   let dispatchTimer;
 
@@ -137,9 +127,11 @@ export default function decorate(block) {
     clearTimeout(dispatchTimer);
     dispatchTimer = setTimeout(() => {
       block.dispatchEvent(new CustomEvent('range-slider:change', {
-        bubbles:  true,
+        bubbles: true,
         composed: true,
-        detail:   { value: val, label, min, max, unit },
+        detail: {
+          value: val, label, min, max, unit,
+        },
       }));
     }, 80);
   });
@@ -149,10 +141,10 @@ export default function decorate(block) {
     const current = parseFloat(input.value);
 
     const deltas = {
-      PageUp:   bigStep,
+      PageUp: bigStep,
       PageDown: -bigStep,
-      Home:     min - current,
-      End:      max - current,
+      Home: min - current,
+      End: max - current,
     };
 
     if (!(e.key in deltas)) return;

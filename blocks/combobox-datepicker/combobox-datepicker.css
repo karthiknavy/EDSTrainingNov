@@ -1,11 +1,9 @@
-
 .cb-datepicker {
   position: relative;
   display: inline-block;
   font-family: var(--body-font-family, system-ui, sans-serif);
   max-width: 320px;
 }
-
 
 .cb-datepicker label {
   display: block;
@@ -26,44 +24,49 @@
   outline-offset: 2px;
 }
 
+/* Visually hidden live region for screen-reader announcements */
+.cb-datepicker .cb-datepicker-sr-announcement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
 
-.cb-datepicker__dialog {
+.cb-datepicker .cb-datepicker-dialog {
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
   z-index: 1000;
-
-  background: #ffffff;
+  background: #fff;
   border: 1px solid #ccc;
   border-radius: 4px;
-
   padding: 0.75rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
+  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
   min-width: 280px;
 }
 
-
-.cb-datepicker__dialog[hidden] {
+.cb-datepicker .cb-datepicker-dialog[hidden] {
   display: none;
 }
 
-
-.cb-datepicker__header {
+.cb-datepicker .cb-datepicker-header {
   display: flex;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
-.cb-datepicker__header select {
+.cb-datepicker .cb-datepicker-header select {
   flex: 1;
   padding: 0.25rem;
   font-size: 0.875rem;
 }
 
-
-
-.cb-datepicker__grid {
+.cb-datepicker .cb-datepicker-grid {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
@@ -71,114 +74,95 @@
   margin-bottom: 0.5rem;
 }
 
-.cb-datepicker__grid th {
+.cb-datepicker .cb-datepicker-grid th {
   font-size: 0.75rem;
   font-weight: 600;
   padding: 0.25rem;
   color: #555;
 }
 
-.cb-datepicker__grid td {
+.cb-datepicker .cb-datepicker-grid td {
   padding: 0.4rem 0;
   cursor: pointer;
   border-radius: 4px;
   user-select: none;
 }
 
-.cb-datepicker__grid td:empty {
+.cb-datepicker .cb-datepicker-grid td:empty {
   cursor: default;
 }
 
-
-.cb-datepicker__grid td:hover:not(:empty) {
-  background: rgba(3, 65, 141, 0.12);
-  color:black
+/* Focus states before hover to avoid descending-specificity violations */
+.cb-datepicker .cb-datepicker-grid td:focus-visible {
+  outline: 2px solid var(--link-color, #1473e6);
+  outline-offset: -2px;
+  background: rgb(20 115 230 / 12%);
+  border-radius: 4px;
 }
 
-.cb-datepicker__grid td.selected {
+.cb-datepicker .cb-datepicker-grid td:focus {
+  outline: 2px solid var(--link-color, #1473e6);
+  outline-offset: -2px;
+  background: rgb(20 115 230 / 12%);
+}
+
+.cb-datepicker .cb-datepicker-grid td:hover:not(:empty) {
+  background: rgb(3 65 141 / 12%);
+  color: black;
+}
+
+.cb-datepicker .cb-datepicker-grid td.selected {
   background: var(--link-color, #1473e6);
-  color: #ffffff;
+  color: #fff;
   font-weight: 600;
 }
 
-
-.cb-datepicker__grid td:focus-visible {
-  outline: 2px solid var(--link-color, #1473e6);
-  outline-offset: -2px;
+.cb-datepicker .cb-datepicker-grid td.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
-.cb-datepicker__footer {
+.cb-datepicker .cb-datepicker-footer {
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
   margin-top: 0.5rem;
 }
 
-.cb-datepicker__footer button {
+.cb-datepicker .cb-datepicker-footer button {
   flex: 1;
   padding: 0.4rem;
   font-size: 0.875rem;
   cursor: pointer;
 }
 
-.cb-datepicker__footer button:focus-visible {
+.cb-datepicker .cb-datepicker-footer button:focus-visible {
   outline: 2px solid var(--link-color, #1473e6);
   outline-offset: 2px;
 }
 
-
-.cb-datepicker__grid td:focus-visible {
-  outline: 2px solid var(--link-color, #1473e6);
-  outline-offset: -2px;
-  background: rgba(20, 115, 230, 0.12);
-  border-radius: 4px;
-}
-
-
-.cb-datepicker__grid td:focus {
-  outline: 2px solid var(--link-color, #1473e6);
-  outline-offset: -2px;
-  background: rgba(20, 115, 230, 0.12);
-}
-.sr-only {
-  position: absolute !important;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-
-
-@media (max-width: 480px) {
-  .cb-datepicker__dialog {
+@media (width <= 480px) {
+  .cb-datepicker .cb-datepicker-dialog {
     min-width: 100%;
   }
 }
 
-
-
 @media (prefers-reduced-motion: reduce) {
-  .cb-datepicker__dialog {
+  .cb-datepicker .cb-datepicker-dialog {
     transition: none;
   }
 }
 
-
 @media (forced-colors: active) {
-  .cb-datepicker__dialog {
+  .cb-datepicker .cb-datepicker-dialog {
     border-color: ButtonText;
     background: Canvas;
   }
 
-  .cb-datepicker__grid td.selected {
+  .cb-datepicker .cb-datepicker-grid td.selected {
     background: Highlight;
     color: HighlightText;
     forced-color-adjust: none;
   }
 }
-

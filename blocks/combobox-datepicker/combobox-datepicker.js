@@ -1,32 +1,32 @@
 export default function decorate(block) {
-
   const raw = {};
   [...block.querySelectorAll(':scope > div')].forEach((row) => {
     const cells = [...row.children]
-      .map(c => c.textContent?.trim())
+      .map((c) => c.textContent?.trim())
       .filter(Boolean);
     if (cells.length === 2) {
-      raw[cells[0].toLowerCase()] = cells[1];
+      const [key, val] = cells;
+      raw[key.toLowerCase()] = val;
     }
   });
 
-  const labelText = raw.label  ?? 'Select date';
-  const format    = raw.format ?? 'yyyy-mm-dd';
+  const labelText = raw.label ?? 'Select date';
+  const format = raw.format ?? 'yyyy-mm-dd';
 
   const parseDateString = (str) => {
-    const sep    = format.match(/[^a-z0-9]/i)?.[0] ?? '-';
+    const sep = format.match(/[^a-z0-9]/i)?.[0] ?? '-';
     const fParts = format.toLowerCase().split(sep);
     const vParts = str.split(sep);
 
-    const di = fParts.findIndex(p => p === 'dd' || p === 'd');
-    const mi = fParts.findIndex(p => p === 'mm' || p === 'm');
-    const yi = fParts.findIndex(p => p === 'yyyy' || p === 'yy');
+    const di = fParts.findIndex((p) => p === 'dd' || p === 'd');
+    const mi = fParts.findIndex((p) => p === 'mm' || p === 'm');
+    const yi = fParts.findIndex((p) => p === 'yyyy' || p === 'yy');
 
     if (di === -1 || mi === -1 || yi === -1) return null;
 
     const d = parseInt(vParts[di], 10);
     const m = parseInt(vParts[mi], 10);
-    let   y = parseInt(vParts[yi], 10);
+    let y = parseInt(vParts[yi], 10);
 
     if (y < 100) y += 2000;
     if (!Number.isFinite(d) || !Number.isFinite(m) || !Number.isFinite(y)) return null;
@@ -38,8 +38,8 @@ export default function decorate(block) {
   const maxDate = raw.max ? parseDateString(raw.max) : null;
 
   // ── Helpers ────────────────────────────────────────────────────────────────
-  const uid   = `cd-${crypto.randomUUID().slice(0, 8)}`;
-  const pad2  = n => String(n).padStart(2, '0');
+  const uid = `cd-${crypto.randomUUID().slice(0, 8)}`;
+  const pad2 = (n) => String(n).padStart(2, '0');
   const today = new Date();
   const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 
@@ -53,15 +53,14 @@ export default function decorate(block) {
     if (!(date instanceof Date)) return '';
     const tokens = {
       yyyy: date.getFullYear(),
-      yy:   String(date.getFullYear()).slice(-2),
-      mm:   pad2(date.getMonth() + 1),
-      m:    date.getMonth() + 1,
-      dd:   pad2(date.getDate()),
-      d:    date.getDate(),
+      yy: String(date.getFullYear()).slice(-2),
+      mm: pad2(date.getMonth() + 1),
+      m: date.getMonth() + 1,
+      dd: pad2(date.getDate()),
+      d: date.getDate(),
     };
-    return format.replace(/yyyy|yy|mm|m|dd|d/gi, match => tokens[match.toLowerCase()]);
+    return format.replace(/yyyy|yy|mm|m|dd|d/gi, (match) => tokens[match.toLowerCase()]);
   };
-
 
   let defaultDate = null;
   const rawDefault = raw.default?.toLowerCase().trim();
@@ -72,48 +71,46 @@ export default function decorate(block) {
     defaultDate = !isDisabled(todayMidnight) ? todayMidnight : null;
   } else {
     const parsed = parseDateString(raw.default);
-    defaultDate  = (parsed && !isDisabled(parsed)) ? parsed : null;
+    defaultDate = (parsed && !isDisabled(parsed)) ? parsed : null;
   }
 
-
   let committedDate = defaultDate;
-  let selectedDate  = defaultDate;
-  let draftValue    = '';
+  let selectedDate = defaultDate;
+  let draftValue = '';
   let current = defaultDate
     ? new Date(defaultDate.getFullYear(), defaultDate.getMonth(), 1)
     : new Date(today.getFullYear(), today.getMonth(), 1);
   let activeCell = null;
-  let isOpen     = false;
+  let isOpen = false;
 
   // ── DOM ────────────────────────────────────────────────────────────────────
   const wrapper = document.createElement('div');
   wrapper.className = 'cb-datepicker';
 
   const labelEl = document.createElement('label');
-  labelEl.id          = `${uid}-label`;
-  labelEl.htmlFor     = uid;
+  labelEl.id = `${uid}-label`;
+  labelEl.htmlFor = uid;
   labelEl.textContent = labelText;
 
   const input = document.createElement('input');
-  input.id          = uid;
-  input.type        = 'text';
-  input.readOnly    = true;
-  input.setAttribute('role',          'combobox');
+  input.id = uid;
+  input.type = 'text';
+  input.readOnly = true;
+  input.setAttribute('role', 'combobox');
   input.setAttribute('aria-haspopup', 'dialog');
   input.setAttribute('aria-expanded', 'false');
   input.setAttribute('aria-controls', `${uid}-dialog`);
 
-
   input.placeholder = formatDate(new Date(2000, 0, 31));
 
   if (defaultDate) {
-    input.value   = formatDate(defaultDate);
+    input.value = formatDate(defaultDate);
   }
 
   const dialog = document.createElement('div');
-  dialog.id        = `${uid}-dialog`;
-  dialog.className = 'cb-datepicker__dialog';
-  dialog.setAttribute('role',         'dialog');
+  dialog.id = `${uid}-dialog`;
+  dialog.className = 'cb-datepicker-dialog';
+  dialog.setAttribute('role', 'dialog');
 
   dialog.setAttribute('aria-labelledby', `${uid}-label`);
 
@@ -121,13 +118,13 @@ export default function decorate(block) {
   dialog.hidden = true;
 
   const announcement = document.createElement('div');
-  announcement.className = 'cb-datepicker__sr-announcement';
-  announcement.setAttribute('aria-live',   'polite');
+  announcement.className = 'cb-datepicker-sr-announcement';
+  announcement.setAttribute('aria-live', 'polite');
   announcement.setAttribute('aria-atomic', 'true');
 
   // Header
   const header = document.createElement('div');
-  header.className = 'cb-datepicker__header';
+  header.className = 'cb-datepicker-header';
 
   const monthSel = document.createElement('select');
   monthSel.setAttribute('aria-label', 'Month');
@@ -135,15 +132,13 @@ export default function decorate(block) {
   const yearSel = document.createElement('select');
   yearSel.setAttribute('aria-label', 'Year');
 
-  for (let i = 0; i < 12; i++) {
-    monthSel.append(new Option(
-      new Date(2000, i).toLocaleString(undefined, { month: 'long' }), i
-    ));
+  for (let i = 0; i < 12; i += 1) {
+    monthSel.append(new Option(new Date(2000, i).toLocaleString(undefined, { month: 'long' }), i));
   }
 
   const yearFrom = minDate?.getFullYear() ?? (today.getFullYear() - 100);
-  const yearTo   = maxDate?.getFullYear() ?? (today.getFullYear() + 100);
-  for (let y = yearFrom; y <= yearTo; y++) {
+  const yearTo = maxDate?.getFullYear() ?? (today.getFullYear() + 100);
+  for (let y = yearFrom; y <= yearTo; y += 1) {
     yearSel.append(new Option(y, y));
   }
 
@@ -151,12 +146,12 @@ export default function decorate(block) {
 
   // Grid
   const table = document.createElement('table');
-  table.className = 'cb-datepicker__grid';
+  table.className = 'cb-datepicker-grid';
   table.setAttribute('role', 'grid');
 
   const thead = document.createElement('thead');
-  const trh   = document.createElement('tr');
-  ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(day => {
+  const trh = document.createElement('tr');
+  ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].forEach((day) => {
     const th = document.createElement('th');
     th.setAttribute('scope', 'col');
     th.setAttribute('abbr', day);
@@ -169,21 +164,40 @@ export default function decorate(block) {
   table.append(thead, tbody);
 
   // Footer
-  const footer    = document.createElement('div');
-  footer.className = 'cb-datepicker__footer';
+  const footer = document.createElement('div');
+  footer.className = 'cb-datepicker-footer';
 
   const okBtn = document.createElement('button');
-  okBtn.type        = 'button';
+  okBtn.type = 'button';
   okBtn.textContent = 'OK';
 
   const cancelBtn = document.createElement('button');
-  cancelBtn.type        = 'button';
+  cancelBtn.type = 'button';
   cancelBtn.textContent = 'Cancel';
 
   footer.append(okBtn, cancelBtn);
   dialog.append(announcement, header, table, footer);
   wrapper.append(labelEl, input, dialog);
   block.replaceChildren(wrapper);
+
+  function setActiveCell(cell = null) {
+    const target = cell
+      || tbody.querySelector('td.selected')
+      || tbody.querySelector('td[role="gridcell"]:not(.disabled):not([aria-hidden])');
+
+    if (!target) return;
+
+    tbody.querySelectorAll('td[tabindex="0"]').forEach((td) => { td.tabIndex = -1; });
+    target.tabIndex = 0;
+    target.focus();
+    activeCell = target;
+  }
+
+  const makeDayClickHandler = (clickDate, clickTd) => () => {
+    selectedDate = clickDate;
+    input.value = formatDate(clickDate);
+    setActiveCell(clickTd);
+  };
 
   const renderCalendar = () => {
     tbody.replaceChildren();
@@ -192,31 +206,31 @@ export default function decorate(block) {
     const y = current.getFullYear();
     const m = current.getMonth();
     monthSel.value = m;
-    yearSel.value  = y;
+    yearSel.value = y;
 
     const monthName = new Date(y, m).toLocaleString(undefined, { month: 'long' });
     announcement.textContent = `${monthName} ${y}`;
 
-    const firstDay    = new Date(y, m, 1).getDay();
+    const firstDay = new Date(y, m, 1).getDay();
     const daysInMonth = new Date(y, m + 1, 0).getDate();
     let tr = document.createElement('tr');
 
-    for (let i = 0; i < firstDay; i++) {
+    for (let i = 0; i < firstDay; i += 1) {
       const empty = document.createElement('td');
       empty.setAttribute('aria-hidden', 'true');
       tr.appendChild(empty);
     }
 
-    for (let d = 1; d <= daysInMonth; d++) {
+    for (let d = 1; d <= daysInMonth; d += 1) {
       const date = new Date(y, m, d);
-      const td   = document.createElement('td');
+      const td = document.createElement('td');
       td.textContent = d;
       td.setAttribute('role', 'gridcell');
       td.tabIndex = -1;
 
       const isToday = date.getFullYear() === todayMidnight.getFullYear()
         && date.getMonth() === todayMidnight.getMonth()
-        && date.getDate()  === todayMidnight.getDate();
+        && date.getDate() === todayMidnight.getDate();
       if (isToday) td.dataset.today = '';
 
       if (isDisabled(date)) {
@@ -226,17 +240,13 @@ export default function decorate(block) {
       } else {
         const isSelected = committedDate instanceof Date
           && date.getFullYear() === committedDate.getFullYear()
-          && date.getMonth()    === committedDate.getMonth()
-          && date.getDate()     === committedDate.getDate();
+          && date.getMonth() === committedDate.getMonth()
+          && date.getDate() === committedDate.getDate();
 
         td.setAttribute('aria-selected', isSelected ? 'true' : 'false');
         if (isSelected) td.classList.add('selected');
 
-        td.addEventListener('click', () => {
-          selectedDate = date;
-          input.value  = formatDate(date);
-          setActiveCell(td);
-        });
+        td.addEventListener('click', makeDayClickHandler(date, td));
       }
 
       tr.appendChild(td);
@@ -250,28 +260,14 @@ export default function decorate(block) {
     setActiveCell();
   };
 
-  const setActiveCell = (cell = null) => {
-    const target =
-      cell ||
-      tbody.querySelector('td.selected') ||
-      tbody.querySelector('td[role="gridcell"]:not(.disabled):not([aria-hidden])');
-
-    if (!target) return;
-
-    tbody.querySelectorAll('td[tabindex="0"]').forEach(td => { td.tabIndex = -1; });
-    target.tabIndex = 0;
-    target.focus();
-    activeCell = target;
-  };
-
   const trapFocus = (e) => {
     if (e.key !== 'Tab') return;
     const focusable = [...dialog.querySelectorAll(
-      'select, button, [tabindex="0"]'
-    )].filter(el => !el.disabled && !el.closest('[aria-hidden="true"]'));
+      'select, button, [tabindex="0"]',
+    )].filter((el) => !el.disabled && !el.closest('[aria-hidden="true"]'));
     if (!focusable.length) return;
     const first = focusable[0];
-    const last  = focusable[focusable.length - 1];
+    const last = focusable[focusable.length - 1];
     if (e.shiftKey && document.activeElement === first) {
       e.preventDefault();
       last.focus();
@@ -281,23 +277,41 @@ export default function decorate(block) {
     }
   };
 
+  let docClickHandler = null;
+
+  const close = () => {
+    if (!isOpen) return;
+    isOpen = false;
+    dialog.hidden = true;
+    input.setAttribute('aria-expanded', 'false');
+    dialog.removeEventListener('keydown', trapFocus);
+    if (docClickHandler) document.removeEventListener('click', docClickHandler);
+    input.focus();
+  };
+
+  const restoreAndClose = () => {
+    input.value = draftValue;
+    selectedDate = committedDate;
+    close();
+  };
+
   // Keyboard navigation
   table.addEventListener('keydown', (e) => {
     if (!activeCell) return;
 
     const cells = [...tbody.querySelectorAll(
-      'td[role="gridcell"]:not(.disabled):not([aria-hidden])'
+      'td[role="gridcell"]:not(.disabled):not([aria-hidden])',
     )];
     const idx = cells.indexOf(activeCell);
-    let next  = null;
+    let next = null;
 
     switch (e.key) {
       case 'ArrowRight': next = cells[idx + 1]; break;
-      case 'ArrowLeft':  next = cells[idx - 1]; break;
-      case 'ArrowDown':  next = cells[idx + 7]; break;
-      case 'ArrowUp':    next = cells[idx - 7]; break;
-      case 'Home':       next = cells[0];        break;
-      case 'End':        next = cells[cells.length - 1]; break;
+      case 'ArrowLeft': next = cells[idx - 1]; break;
+      case 'ArrowDown': next = cells[idx + 7]; break;
+      case 'ArrowUp': next = cells[idx - 7]; break;
+      case 'Home': [next] = cells; break;
+      case 'End': next = cells[cells.length - 1]; break;
       case 'PageDown':
         current = new Date(current.getFullYear(), current.getMonth() + (e.shiftKey ? 12 : 1), 1);
         renderCalendar();
@@ -322,14 +336,10 @@ export default function decorate(block) {
     if (next) { e.preventDefault(); setActiveCell(next); }
   });
 
-  const onDocClick = (e) => {
-    if (!e.composedPath().includes(wrapper)) restoreAndClose();
-  };
-
   const open = () => {
     if (isOpen) return;
-    isOpen       = true;
-    draftValue   = input.value;
+    isOpen = true;
+    draftValue = input.value;
     selectedDate = committedDate;
 
     if (committedDate instanceof Date) {
@@ -339,32 +349,26 @@ export default function decorate(block) {
     dialog.hidden = false;
     input.setAttribute('aria-expanded', 'true');
     dialog.addEventListener('keydown', trapFocus);
-    document.addEventListener('click', onDocClick);
+    docClickHandler = (e) => {
+      if (!e.composedPath().includes(wrapper)) restoreAndClose();
+    };
+    document.addEventListener('click', docClickHandler);
     renderCalendar();
-  };
-
-  const close = () => {
-    if (!isOpen) return;
-    isOpen = false;
-    dialog.hidden = true;
-    input.setAttribute('aria-expanded', 'false');
-    dialog.removeEventListener('keydown', trapFocus);
-    document.removeEventListener('click', onDocClick);
-    input.focus();
-  };
-
-  const restoreAndClose = () => {
-    input.value  = draftValue;
-    selectedDate = committedDate;
-    close();
   };
 
   input.addEventListener('click', open);
 
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      open();
+    }
+  });
+
   okBtn.addEventListener('click', () => {
     if (!(selectedDate instanceof Date)) return;
     committedDate = selectedDate;
-    input.value   = formatDate(committedDate);
+    input.value = formatDate(committedDate);
     close();
   });
 

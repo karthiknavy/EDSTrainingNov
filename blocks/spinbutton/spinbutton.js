@@ -7,7 +7,8 @@ export default function decorate(block) {
       .map((c) => c.textContent?.trim())
       .filter(Boolean);
     if (cells.length === 2) {
-      config[cells[0].toLowerCase()] = cells[1];
+      const [key, val] = cells;
+      config[key.toLowerCase()] = val;
     }
   });
 
@@ -42,16 +43,16 @@ export default function decorate(block) {
   block.replaceChildren();
 
   const labelEl = document.createElement('label');
-  labelEl.className = 'spinbutton__label';
+  labelEl.className = 'spinbutton-label';
   labelEl.htmlFor = uid;
   labelEl.textContent = label;
 
   const container = document.createElement('div');
-  container.className = 'spinbutton__container';
+  container.className = 'spinbutton-container';
 
   const decreaseBtn = document.createElement('button');
   decreaseBtn.type = 'button';
-  decreaseBtn.className = 'spinbutton__button spinbutton__button--decrease';
+  decreaseBtn.className = 'spinbutton-button spinbutton-button-decrease';
   decreaseBtn.textContent = '−';
   decreaseBtn.setAttribute('aria-label', `Decrease ${label}`);
   decreaseBtn.setAttribute('aria-controls', uid);
@@ -59,7 +60,7 @@ export default function decorate(block) {
   const input = document.createElement('input');
   input.id = uid;
   input.type = 'text';
-  input.className = 'spinbutton__input';
+  input.className = 'spinbutton-input';
   input.setAttribute('role', 'spinbutton');
   input.setAttribute('inputmode', 'decimal');
   input.setAttribute('aria-valuemin', min);
@@ -70,7 +71,7 @@ export default function decorate(block) {
 
   const increaseBtn = document.createElement('button');
   increaseBtn.type = 'button';
-  increaseBtn.className = 'spinbutton__button spinbutton__button--increase';
+  increaseBtn.className = 'spinbutton-button spinbutton-button-increase';
   increaseBtn.textContent = '+';
   increaseBtn.setAttribute('aria-label', `Increase ${label}`);
   increaseBtn.setAttribute('aria-controls', uid);
@@ -78,7 +79,7 @@ export default function decorate(block) {
   let unitEl = null;
   if (unit) {
     unitEl = document.createElement('span');
-    unitEl.className = 'spinbutton__unit';
+    unitEl.className = 'spinbutton-unit';
     unitEl.textContent = unit;
     unitEl.setAttribute('aria-hidden', 'true');
   }
@@ -103,7 +104,9 @@ export default function decorate(block) {
       new CustomEvent('spinbutton:change', {
         bubbles: true,
         composed: true,
-        detail: { value, min, max, step, unit },
+        detail: {
+          value, min, max, step, unit,
+        },
       }),
     );
   };
@@ -177,7 +180,9 @@ export default function decorate(block) {
       return {
         getValue: () => value,
         setValue: (v) => update(v),
-        getConfig: () => ({ min, max, step, unit, label }),
+        getConfig: () => ({
+          min, max, step, unit, label,
+        }),
       };
     },
   });

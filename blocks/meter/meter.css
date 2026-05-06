@@ -1,0 +1,210 @@
+/* Meter Block */
+.meter {
+  --meter-color-optimal: #1a9e5c;
+  --meter-color-suboptimal: #e07b00;
+  --meter-color-bad: #d93025;
+  --meter-track-bg: #e5e7eb;
+  --meter-track-height: 10px;
+  --meter-border-radius: 9999px;
+  --meter-label-color: var(--text-color, #2c2c2c);
+  --meter-value-color: var(--text-color, #2c2c2c);
+
+  width: 100%;
+  font-family: var(--body-font-family, adobe-clean, sans-serif);
+}
+
+.meter .meter-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+
+.meter .meter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.meter .meter-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--meter-label-color);
+}
+
+.meter .meter-value {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--meter-value-color);
+  transition: color 0.3s ease;
+}
+
+.meter .meter-value-optimal {
+  color: var(--meter-color-optimal);
+}
+
+.meter .meter-value-suboptimal {
+  color: var(--meter-color-suboptimal);
+}
+
+.meter .meter-value-bad {
+  color: var(--meter-color-bad);
+}
+
+
+.meter .meter-track-area {
+  position: relative;
+  width: 100%;
+}
+
+.meter .meter-track-area-has-optimum {
+  padding-top: 10px;
+}
+
+
+
+.meter .meter-track {
+  position: relative;
+  width: 100%;
+  height: var(--meter-track-height);
+  background: var(--meter-track-bg);
+  border-radius: var(--meter-border-radius);
+  overflow: hidden;
+}
+
+
+.meter .meter-segments {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  pointer-events: none;
+}
+
+.meter .meter-segment {
+  height: 100%;
+  opacity: 0.18;
+}
+
+.meter .meter-segment-low {
+  background: var(--meter-color-suboptimal);
+}
+
+.meter .meter-segment-normal {
+  background: var(--meter-color-optimal);
+}
+
+.meter .meter-segment-high {
+  background: var(--meter-color-suboptimal);
+}
+
+
+.meter .meter-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  min-width: 0;
+  max-width: 100%;
+  border-radius: var(--meter-border-radius);
+  transition: width 0.4s ease, background-color 0.3s ease;
+}
+
+.meter .meter-fill-optimal {
+  background: var(--meter-color-optimal);
+}
+
+.meter .meter-fill-suboptimal {
+  background: var(--meter-color-suboptimal);
+}
+
+.meter .meter-fill-bad {
+  background: var(--meter-color-bad);
+}
+
+
+.meter .meter-marker {
+  position: absolute;
+  bottom: 0;
+  width: 2px;
+  height: var(--meter-track-height);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.meter .meter-marker-threshold {
+  background: rgb(0 0 0 / 25%);
+}
+
+.meter .meter-marker-optimum {
+  background: rgb(0 0 0 / 55%);
+}
+
+.meter .meter-marker-optimum::after {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid rgb(0 0 0 / 55%);
+}
+
+
+
+.meter .meter-range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-color, #6b7280);
+  opacity: 0.7;
+}
+
+
+@media (width >= 600px) {
+  .meter {
+    --meter-track-height: 12px;
+  }
+
+  .meter .meter-label,
+  .meter .meter-value {
+    font-size: 0.875rem;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .meter .meter-fill {
+    transition: none;
+  }
+
+  .meter .meter-value {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .meter .meter-track {
+    border: 1px solid ButtonText;
+  }
+
+  .meter .meter-fill-optimal,
+  .meter .meter-fill-suboptimal,
+  .meter .meter-fill-bad {
+    background: Highlight;
+  }
+
+  .meter .meter-marker-threshold,
+  .meter .meter-marker-optimum {
+    background: ButtonText;
+  }
+
+  .meter .meter-segment {
+    display: none;
+  }
+}

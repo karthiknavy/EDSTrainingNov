@@ -5,7 +5,7 @@
   max-width: 100%;
 }
 
-.spinbutton .spinbutton__label {
+.spinbutton .spinbutton-label {
   display: block;
   margin-bottom: 0.5rem;
   font-size: 0.875rem;
@@ -13,7 +13,7 @@
   color: var(--text-color, #333);
 }
 
-.spinbutton .spinbutton__container {
+.spinbutton .spinbutton-container {
   display: flex;
   align-items: center;
   border: 1px solid var(--border-color, #ccc);
@@ -22,7 +22,7 @@
   background-color: var(--input-background, #fff);
 }
 
-.spinbutton .spinbutton__button {
+.spinbutton .spinbutton-button {
   flex: 0 0 auto;
   width: 2.25rem;
   height: 2.25rem;
@@ -40,31 +40,31 @@
   border-right: 1px solid var(--border-color, #ccc);
 }
 
-.spinbutton .spinbutton__button--increase {
+.spinbutton .spinbutton-button-increase {
   border-right: none;
   border-left: 1px solid var(--border-color, #ccc);
   order: 3;
 }
 
-.spinbutton .spinbutton__button:hover:not(:disabled) {
-  background-color: var(--button-hover-background, #e8e8e8);
-}
-
-.spinbutton .spinbutton__button:active:not(:disabled) {
-  background-color: var(--button-active-background, #ddd);
-}
-
-.spinbutton .spinbutton__button:focus-visible {
+.spinbutton .spinbutton-button:focus-visible {
   outline: 2px solid var(--focus-color, #1473e6);
   outline-offset: -2px;
 }
 
-.spinbutton .spinbutton__button:disabled {
+.spinbutton .spinbutton-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.spinbutton .spinbutton__input {
+.spinbutton .spinbutton-button:hover:not(:disabled) {
+  background-color: var(--button-hover-background, #e8e8e8);
+}
+
+.spinbutton .spinbutton-button:active:not(:disabled) {
+  background-color: var(--button-active-background, #ddd);
+}
+
+.spinbutton .spinbutton-input {
   flex: 1;
   min-width: 0;
   padding: 0.4rem 0.5rem;
@@ -76,23 +76,23 @@
   background-color: transparent;
 }
 
-.spinbutton .spinbutton__input::-webkit-outer-spin-button,
-.spinbutton .spinbutton__input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+.spinbutton .spinbutton-input::-webkit-outer-spin-button,
+.spinbutton .spinbutton-input::-webkit-inner-spin-button {
+  appearance: none;
   margin: 0;
 }
 
-.spinbutton .spinbutton__input:focus {
+.spinbutton .spinbutton-input:focus {
   outline: none;
   background-color: var(--input-focus-background, #f9f9f9);
 }
 
-.spinbutton .spinbutton__input:disabled {
+.spinbutton .spinbutton-input:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.spinbutton .spinbutton__unit {
+.spinbutton .spinbutton-unit {
   padding: 0.5rem 0.5rem 0.5rem 0;
   font-size: 0.875rem;
   color: var(--text-secondary, #666);
@@ -100,18 +100,18 @@
   order: 2;
 }
 
-@media (min-width: 600px) {
+@media (width >= 600px) {
   .spinbutton {
     max-width: 180px;
   }
 
-  .spinbutton .spinbutton__button {
+  .spinbutton .spinbutton-button {
     width: 2.5rem;
     height: 2.5rem;
     font-size: 1.25rem;
   }
 
-  .spinbutton .spinbutton__input {
+  .spinbutton .spinbutton-input {
     padding: 0.5rem 0.75rem;
     font-size: 1rem;
   }
